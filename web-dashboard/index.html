@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autonomous Garbage Robot Dash</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Firebase App & Realtime Database SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+</head>
+<body>
+  <div class="dashboard-container">
+    <!-- Header -->
+    <header class="dashboard-header">
+      <div class="brand">
+        <span class="brand-icon">♻️</span>
+        <h1>Autonomous Garbage Robot</h1>
+      </div>
+      <p class="subtitle">Real-time Waste Management Dashboard</p>
+      <div class="connection-status" id="connection-status">
+        <span class="status-dot"></span>
+        <span class="status-text">Connecting to Firebase...</span>
+      </div>
+    </header>
+
+    <!-- Top Metric Cards Grid -->
+    <div class="metrics-grid">
+      <!-- 1. Garbage Level Card -->
+      <div class="card metric-card" id="card-garbage-level">
+        <h2 class="card-title">Garbage Level</h2>
+        <div class="gauge-container">
+          <svg class="progress-ring" viewBox="0 0 160 160">
+            <circle class="ring-bg" cx="80" cy="80" r="66" />
+            <circle class="ring-progress" id="ring-progress" cx="80" cy="80" r="66" />
+          </svg>
+          <div class="gauge-text">
+            <span class="gauge-percent" id="garbage-level-percent">0%</span>
+          </div>
+        </div>
+        <div class="badge-wrapper">
+          <span class="status-pill" id="garbage-status-pill">EMPTY</span>
+        </div>
+      </div>
+
+      <!-- 2. Lid Status Card -->
+      <div class="card metric-card" id="card-lid-status">
+        <h2 class="card-title">Lid Status</h2>
+        <div class="lid-status-container">
+          <div class="lid-indicator-circle" id="lid-indicator"></div>
+          <span class="status-pill lid-pill" id="lid-status-text">CLOSED</span>
+        </div>
+      </div>
+
+      <!-- 3. Robot Status Card -->
+      <div class="card metric-card" id="card-robot-status">
+        <h2 class="card-title">
+          <span class="title-icon">🤖</span> Robot Status
+        </h2>
+        <div class="status-list">
+          <div class="status-row">
+            <div class="row-label">
+              <span class="row-icon">⏻</span>
+              <span>State:</span>
+            </div>
+            <span class="status-pill info-pill" id="robot-state">IDLE</span>
+          </div>
+
+          <div class="status-row">
+            <div class="row-label">
+              <span class="row-icon">📍</span>
+              <span>Target:</span>
+            </div>
+            <span class="status-pill info-pill" id="robot-target">0</span>
+          </div>
+
+          <div class="status-row">
+            <div class="row-label">
+              <span class="row-icon">📏</span>
+              <span>Obstacle:</span>
+            </div>
+            <div class="value-with-unit">
+              <span class="status-pill info-pill" id="robot-obstacle">100</span>
+              <span class="unit-label">cm</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- History Chart Card -->
+    <div class="card history-card">
+      <div class="history-header">
+        <div class="history-title-wrap">
+          <span class="chart-icon">📈</span>
+          <h2 class="card-title">Garbage Level History</h2>
+        </div>
+        <p class="history-subtitle">Last 30 minutes (updated every 30 seconds)</p>
+      </div>
+      <div class="chart-container">
+        <canvas id="historyChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

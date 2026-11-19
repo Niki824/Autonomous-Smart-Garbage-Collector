@@ -1,0 +1,22 @@
+# Compiled Arduino / PlatformIO output
+*.hex
+*.bin
+*.elf
+build/
+.pio/
+
+# OS specific files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# IDE & Editor files
+.vscode/
+.idea/
+*.swp
+*.bak
+*~
+
+# Environment & Sensitive configs
+.env
+.env.local
